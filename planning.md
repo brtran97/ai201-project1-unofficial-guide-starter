@@ -8,7 +8,7 @@
 ---
 
 ## Domain
-
+My domain is on-campus dining guide at UC Davis. The information is available to find online if you are willing to to the research but since there are so many options it becomes difficult to navigate and find the answer that you are looking for. The domain will cover the different dining options and includes some reddit reviews in order to have more opinions in case the users wants recommendations.
 <!-- What domain did you choose? Why is this knowledge valuable and hard to find through official channels? -->
 
 ---

@@ -8,7 +8,7 @@
 ---
 
 ## Domain
-
+On-campus dining options at UC davis. Useful because there are many options and while you can dig through all of them it becomes overwhelming and clunky when you want a simple question answered. 
 <!-- What topic or category of knowledge does your system cover?
      Why is this knowledge valuable, and why is it hard to find through official channels?
      Example: "Student reviews of CS professors at [university] — useful because official
