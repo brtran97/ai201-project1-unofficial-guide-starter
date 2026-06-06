@@ -30,23 +30,20 @@ My domain is on-campus dining guide at UC Davis. The information is available to
 | 8 |reddit r/UCDavis |reddit review thread |https://www.reddit.com/r/UCDavis/comments/1n8zuem/diningcampus_food/ |
 | 9 |reddit r/UCDavis |reddit review thread |https://www.reddit.com/r/UCDavis/comments/1nxjuiy/what_is_the_best_food_item_on_campus_and_where/ |
 | 10 |reddit r/UCDavis |reddit review thread |https://www.reddit.com/r/UCDavis/comments/1dlosaj/dining_commons_food/ |
-| 11 |yelp | yelp review of dining hall | https://www.yelp.com/biz/segundo-dining-commons-davis |
-| 12 |yelp | yelp review of dining hall | https://www.yelp.com/biz/latitude-davis |
-| 13 |yelp | yelp review of dining hall | https://www.yelp.com/biz/tercero-dining-commons-davis |
-| 14 |yelp | yelp review of dining hall | https://www.yelp.com/biz/cuarto-dining-commons-davis |
-| 15 |ucd official | on campus restaurant | https://housing.ucdavis.edu/dining/the-gunrock/ |
-| 16 |ucd official | on campus restaurant | https://housing.ucdavis.edu/dining/spokes/ |
-| 17 |ucd official | on campus cafe | https://housing.ucdavis.edu/dining/coffee/ |
-| 18 |ucd official | on campus convenience store | https://housing.ucdavis.edu/dining/markets/residential-markets/ |
-| 19 | ucd official | on campus quick food | https://housing.ucdavis.edu/dining/latitude-market/ |
-| 20 | ucd official | on campus convenience store | https://housing.ucdavis.edu/dining/markets/silo-market/ |
-| 21 | ucd official | on campus food trucks | https://housing.ucdavis.edu/dining/food-trucks/ |
-| 22 | ucd official | meal plans | https://housing.ucdavis.edu/dining/meal-plans/residential/ |
-| 23 | ucd official | aggie cash | https://housing.ucdavis.edu/dining/aggie-cash/ |
-| 24 | ucd official | vegan & vegetarian info | https://housing.ucdavis.edu/dining/nutrition/vegan-and-vegetarian-options/ |
-| 25 | ucd official | halal and kosher info | https://housing.ucdavis.edu/dining/nutrition/halal-and-kosher-dining-options/ |
-| 26 | ucd official | allergy info | https://housing.ucdavis.edu/dining/nutrition/food-allergens-and-ingredients-of-concern/ |
-| 27 | ucd official | yogurt shop | https://housing.ucdavis.edu/dining/yoloberry-yogurt/ |
+| 11 |ucd official | on campus restaurant | https://housing.ucdavis.edu/dining/the-gunrock/ |
+| 12 |ucd official | on campus restaurant | https://housing.ucdavis.edu/dining/spokes/ |
+| 13 |ucd official | on campus cafe | https://housing.ucdavis.edu/dining/coffee/ |
+| 14 |ucd official | on campus convenience store | https://housing.ucdavis.edu/dining/markets/residential-markets/ |
+| 15 | ucd official | on campus quick food | https://housing.ucdavis.edu/dining/latitude-market/ |
+| 16 | ucd official | on campus convenience store | https://housing.ucdavis.edu/dining/markets/silo-market/ |
+| 17 | ucd official | on campus food trucks | https://housing.ucdavis.edu/dining/food-trucks/ |
+| 18 | ucd official | meal plans | https://housing.ucdavis.edu/dining/meal-plans/residential/ |
+| 19 | ucd official | aggie cash | https://housing.ucdavis.edu/dining/aggie-cash/ |
+| 20 | ucd official | vegan & vegetarian info | https://housing.ucdavis.edu/dining/nutrition/vegan-and-vegetarian-options/ |
+| 21 | ucd official | halal and kosher info | https://housing.ucdavis.edu/dining/nutrition/halal-and-kosher-dining-options/ |
+| 22 | ucd official | allergy info | https://housing.ucdavis.edu/dining/nutrition/food-allergens-and-ingredients-of-concern/ |
+| 23 | ucd official | yogurt shop | https://housing.ucdavis.edu/dining/yoloberry-yogurt/ |
+| 24 | ucd official | aggie swipe plus meal plan | https://housing.ucdavis.edu/dining/meal-plans/aggie-swipe-plus/ |
 ---
 
 ## Chunking Strategy
@@ -109,7 +106,7 @@ the expectation is that everyone is proficient in english.
 
 | # | Question | Expected answer |
 |---|----------|-----------------|
-| 1 |What are the dining commons available to UC Davis students? | There are 3 dining commons available they are Segundo, Tercero and Cuarto |
+| 1 |Which dining locations accepts meal plans? | The are 3 dining commons Segundo, Tercero and Cuarto as well as the Latitude Restaurant |
 | 2 |Does UC Davis dining offer halal or kosher options? |Yes, at UC Davis Dining Services, the "H" icon is used to help our dining patrons easily identify dishes that meet Halal dietary guidelines and they also offer meals designated as "Kosher-Friendly". |
 | 3 |What is Aggie Cash and how does it work? |Aggie Cash is a declining balance (debit) account students, faculty and staff use to purchase food at UC Davis Dining Services locations. It also comes with a variety of benefits such as 10% discount on most UCD dining locations |
 | 4 |What are the meal plan options for students living in resident halls? | They offer a 5-day and 7-day plans both plans also come with $200 in Aggie Cash per quarter. |
