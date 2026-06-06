@@ -19,3 +19,6 @@ chroma/
 # macOS
 .DS_Store
 .vscode/settings.json
+rubric.md
+project.md
+CLAUDE.md

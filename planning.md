@@ -20,17 +20,33 @@ My domain is on-campus dining guide at UC Davis. The information is available to
 
 | # | Source | Description | URL or location |
 |---|--------|-------------|-----------------|
-| 1 | | | |
-| 2 | | | |
-| 3 | | | |
-| 4 | | | |
-| 5 | | | |
-| 6 | | | |
-| 7 | | | |
-| 8 | | | |
-| 9 | | | |
-| 10 | | | |
-
+| 1 |UCD official website | descriptor of UCD dining commons|https://housing.ucdavis.edu/dining/dining-commons/ |
+| 2 |UCD official website | list of available dining options |https://housing.ucdavis.edu/dining/menus/ |
+| 3 |UCD official website |main dining hall |https://housing.ucdavis.edu/dining/dining-commons/segundo/ |
+| 4 |UCD official website |main dining hall |https://housing.ucdavis.edu/dining/dining-commons/cuarto/ |
+| 5 |UCD official website |main dining hall |https://housing.ucdavis.edu/dining/dining-commons/tercero/ |
+| 6 |UCD news |article talking about dining |https://aggiereader.ucdavis.edu/news/lets-talk-eating-campus |
+| 7 |Scrubs cafe |menu of scrubs cafe |https://scrubscafe.ucdavis.edu/menus |
+| 8 |reddit r/UCDavis |reddit review thread |https://www.reddit.com/r/UCDavis/comments/1n8zuem/diningcampus_food/ |
+| 9 |reddit r/UCDavis |reddit review thread |https://www.reddit.com/r/UCDavis/comments/1nxjuiy/what_is_the_best_food_item_on_campus_and_where/ |
+| 10 |reddit r/UCDavis |reddit review thread |https://www.reddit.com/r/UCDavis/comments/1dlosaj/dining_commons_food/ |
+| 11 |yelp | yelp review of dining hall | https://www.yelp.com/biz/segundo-dining-commons-davis |
+| 12 |yelp | yelp review of dining hall | https://www.yelp.com/biz/latitude-davis |
+| 13 |yelp | yelp review of dining hall | https://www.yelp.com/biz/tercero-dining-commons-davis |
+| 14 |yelp | yelp review of dining hall | https://www.yelp.com/biz/cuarto-dining-commons-davis |
+| 15 |ucd official | on campus restaurant | https://housing.ucdavis.edu/dining/the-gunrock/ |
+| 16 |ucd official | on campus restaurant | https://housing.ucdavis.edu/dining/spokes/ |
+| 17 |ucd official | on campus cafe | https://housing.ucdavis.edu/dining/coffee/ |
+| 18 |ucd official | on campus convenience store | https://housing.ucdavis.edu/dining/markets/residential-markets/ |
+| 19 | ucd official | on campus quick food | https://housing.ucdavis.edu/dining/latitude-market/ |
+| 20 | ucd official | on campus convenience store | https://housing.ucdavis.edu/dining/markets/silo-market/ |
+| 21 | ucd official | on campus food trucks | https://housing.ucdavis.edu/dining/food-trucks/ |
+| 22 | ucd official | meal plans | https://housing.ucdavis.edu/dining/meal-plans/residential/ |
+| 23 | ucd official | aggie cash | https://housing.ucdavis.edu/dining/aggie-cash/ |
+| 24 | ucd official | vegan & vegetarian info | https://housing.ucdavis.edu/dining/nutrition/vegan-and-vegetarian-options/ |
+| 25 | ucd official | halal and kosher info | https://housing.ucdavis.edu/dining/nutrition/halal-and-kosher-dining-options/ |
+| 26 | ucd official | allergy info | https://housing.ucdavis.edu/dining/nutrition/food-allergens-and-ingredients-of-concern/ |
+| 27 | ucd official | yogurt shop | https://housing.ucdavis.edu/dining/yoloberry-yogurt/ |
 ---
 
 ## Chunking Strategy
@@ -42,9 +58,18 @@ My domain is on-campus dining guide at UC Davis. The information is available to
 
 **Chunk size:**
 
+500 character chunks
+
 **Overlap:**
 
+50 character overlap
+
 **Reasoning:**
+
+I will use a chunk size of about 500 characters and the overlap of 50 characters. 
+Since most of my sources are on the shorter side. Using a more moderate size chunk will allow for context to be
+maintained while keeping the chunks small enough to be relevant to the questions asked instead of the entire
+source.
 
 ---
 
@@ -57,10 +82,21 @@ My domain is on-campus dining guide at UC Davis. The information is available to
      support, accuracy on domain-specific text, latency? -->
 
 **Embedding model:**
+all-MiniLM-L6-v2 via sentence-transformers
 
 **Top-k:**
+5 chunks
 
 **Production tradeoff reflection:**
+
+I would use a more powerful embedding model such as those from open ai which will be able to handle much more
+context and I could embed the entire menu schedules for the week. I would also consider if the more powerful
+model will create much more complex embeddings which will increase compuational overhead and by extension 
+latency when being used. I need to maintain accuracy while keeping the latency low. I could also consider
+tuning the LLM to better understand some of the unique names and concepts behind UCD's unique names of
+dining halls and their Aggie cash system. Considering unlimited budget I would like to use a multilingal model
+to support different languages since the University is a melting pot of people from many countries even though
+the expectation is that everyone is proficient in english.
 
 ---
 
