@@ -109,11 +109,11 @@ the expectation is that everyone is proficient in english.
 
 | # | Question | Expected answer |
 |---|----------|-----------------|
-| 1 | | |
-| 2 | | |
-| 3 | | |
-| 4 | | |
-| 5 | | |
+| 1 |What are the dining commons available to UC Davis students? | There are 3 dining commons available they are Segundo, Tercero and Cuarto |
+| 2 |Does UC Davis dining offer halal or kosher options? |Yes, at UC Davis Dining Services, the "H" icon is used to help our dining patrons easily identify dishes that meet Halal dietary guidelines and they also offer meals designated as "Kosher-Friendly". |
+| 3 |What is Aggie Cash and how does it work? |Aggie Cash is a declining balance (debit) account students, faculty and staff use to purchase food at UC Davis Dining Services locations. It also comes with a variety of benefits such as 10% discount on most UCD dining locations |
+| 4 |What are the meal plan options for students living in resident halls? | They offer a 5-day and 7-day plans both plans also come with $200 in Aggie Cash per quarter. |
+| 5 |How does pricing work at the dining common's and latitude? |It is all-you-care-to-eat you pay a flat cost if not on a meal plan and are welcome to eat dishes freely and stay as long as you want. |
 
 ---
 
@@ -123,9 +123,9 @@ the expectation is that everyone is proficient in english.
      Consider: noisy or inconsistent documents, missing source attribution, off-topic
      retrieval, chunks that split key information across boundaries. -->
 
-1.
+1. Reddit and Yelp reviews are opinion based and often contradictory, one student says Segundo is great, another says it's terrible. When the retriever pulls chunks with opposing opinions, the LLM has to reconcile conflicting information, which can lead to vague or misleading answers when there is no single source of truth answer.
 
-2.
+2. UC Davis-specific terminology may embed poorly names like "Aggie Cash," "YoloBerry," "Segundo," "Tercero," and "Latitude" are domain-specific. The embedding model (all-MiniLM-L6-v2) was trained on general text, so a query like "Where can I use Aggie Cash?" might not semantically match a chunk that explains the Aggie Cash system, leading to off-topic retrieval.
 
 ---
 
@@ -136,6 +136,17 @@ the expectation is that everyone is proficient in english.
      Label each stage with the tool or library you're using.
      You can use ASCII art, a Mermaid diagram, or embed a sketch as an image.
      You'll use this diagram as context when prompting AI tools to implement each stage. -->
+
+```mermaid
+flowchart LR
+    A["📄 Document Ingestion\n(Plain .txt files)"] --> B["✂️ Chunking\n(Custom Python splitter)\n500 chars / 50 overlap"]
+    B --> C["🔢 Embedding\n(all-MiniLM-L6-v2)\nsentence-transformers"]
+    C --> D["🗄️ Vector Store\n(ChromaDB)\nChunks + source metadata"]
+    E["❓ User Query\n(Gradio Web UI)"] --> F["🔍 Retrieval\n(ChromaDB similarity search)\nTop-k = 5"]
+    D --> F
+    F --> G["🤖 Generation\n(Groq API)\nllama-3.3-70b-versatile"]
+    G --> H["💬 Grounded Response\nAnswer + source citations"]
+```
 
 ---
 
@@ -152,7 +163,20 @@ the expectation is that everyone is proficient in english.
      with my specified chunk size and overlap" is a plan. -->
 
 **Milestone 3 — Ingestion and chunking:**
+- Tool: Claude Code
+- Input: I'll give Claude Code my Chunking Strategy section (500-char chunks, 50-char overlap) and the Documents table listing my sources. I'll also share a sample .txt file from documents/ so it can see the actual structure of my cleaned text.
+- Expected output: A custom Python function (e.g. chunk_text()) that loads .txt files from documents/, and splits them into chunks matching my specified size and overlap. It should also attach source metadata (filename) to each chunk.
+- Verification: I'll print 5 representative chunks and check that each one is readable, self-contained, and correctly labeled with its source file. I'll also verify the total chunk count falls in a reasonable range (50–2000).
+- Note: Documents will be manually copied from web sources and saved as .txt files in documents/ since several sources (Reddit, Yelp) are difficult to scrape programmatically.
 
 **Milestone 4 — Embedding and retrieval:**
+- Tool: Claude Code
+- Input: I'll give Claude Code my Retrieval Approach section (all-MiniLM-L6-v2, top-k=5) and the Architecture diagram so it understands how embedding and retrieval connect to the rest of the pipeline. I'll share the chunk output format from Milestone 3 so it knows the input structure.
+- Expected output: A script that embeds all chunks using sentence-transformers, stores them in ChromaDB with source metadata, and a retrieval function that accepts a query string and returns the top-5 most similar chunks with their source info and distance scores.
+- Verification: I'll test retrieval with at least 3 of my 5 evaluation questions and check that the returned chunks are relevant to each query and that distance scores on top results are below 0.5.
 
 **Milestone 5 — Generation and interface:**
+- Tool: Claude Code
+- Input: I'll give Claude Code the Grounded Generation requirements from project.md (answer only from retrieved context, cite sources, refuse when documents don't cover the question) and my retrieval function from Milestone 4. I'll specify that the LLM is Groq's llama-3.3-70b-versatile and that the UI should use Gradio.
+- Expected output: Two files — query.py containing an ask() function that retrieves chunks and calls Groq to generate a grounded response with source citations, and app.py containing the Gradio web interface that calls ask() and displays the answer and sources separately.
+- Verification: I'll test end-to-end with 2–3 queries to confirm responses are grounded in retrieved chunks and include source attribution. I'll also ask a question my documents don't cover to verify the system refuses rather than hallucinating.
