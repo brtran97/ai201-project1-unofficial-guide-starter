@@ -53,6 +53,7 @@ On-campus dining options at UC davis. Useful because there are many options and 
 **Why these choices fit your documents:**
 
 **Final chunk count:**
+245
 
 ---
 
