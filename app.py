@@ -9,10 +9,10 @@ def handle_query(question):
 
 
 with gr.Blocks(title="UC Davis Dining Guide") as demo:
-    gr.Markdown("# The Unofficial Guide — UC Davis Dining")
+    gr.Markdown("# The Unofficial Guide — On-Campus UC Davis Dining")
     inp = gr.Textbox(label="Your question", placeholder="e.g. What is Aggie Cash?")
     btn = gr.Button("Ask")
-    answer = gr.Textbox(label="Answer", lines=8)
+    answer = gr.Textbox(label="Answer", lines=8, max_lines=8)
     sources = gr.Textbox(label="Retrieved from", lines=4)
     btn.click(handle_query, inputs=inp, outputs=[answer, sources])
     inp.submit(handle_query, inputs=inp, outputs=[answer, sources])
