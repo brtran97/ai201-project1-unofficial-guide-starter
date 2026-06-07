@@ -106,7 +106,7 @@ the expectation is that everyone is proficient in english.
 
 | # | Question | Expected answer |
 |---|----------|-----------------|
-| 1 |Which dining locations accepts meal plans? | The are 3 dining commons Segundo, Tercero and Cuarto as well as the Latitude Restaurant |
+| 1 |What are all the dining locations that accepts meal plans? | The are 3 dining commons Segundo, Tercero and Cuarto as well as the Latitude Restaurant |
 | 2 |Does UC Davis dining offer halal or kosher options? |Yes, at UC Davis Dining Services, the "H" icon is used to help our dining patrons easily identify dishes that meet Halal dietary guidelines and they also offer meals designated as "Kosher-Friendly". |
 | 3 |What is Aggie Cash and how does it work? |Aggie Cash is a declining balance (debit) account students, faculty and staff use to purchase food at UC Davis Dining Services locations. It also comes with a variety of benefits such as 10% discount on most UCD dining locations |
 | 4 |At Gunrock cafe are there TV's available for watch parties? | Yes they have 7 TV's that are available for watch parties. |
