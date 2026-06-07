@@ -164,7 +164,7 @@ flowchart LR
 - Input: I'll give Claude Code my Chunking Strategy section (500-char chunks, 50-char overlap) and the Documents table listing my sources. I'll also share a sample .txt file from documents/ so it can see the actual structure of my cleaned text.
 - Expected output: A custom Python function (e.g. chunk_text()) that loads .txt files from documents/, and splits them into chunks matching my specified size and overlap. It should also attach source metadata (filename) to each chunk.
 - Verification: I'll print 5 representative chunks and check that each one is readable, self-contained, and correctly labeled with its source file. I'll also verify the total chunk count falls in a reasonable range (50–2000).
-- Note: Documents will be manually copied from web sources and saved as .txt files in documents/ since several sources (Reddit, Yelp) are difficult to scrape programmatically.
+- Note: Documents will be manually copied from web sources and saved as .txt files in documents/ since several sources (Reddit) are difficult to scrape programmatically.
 
 **Milestone 4 — Embedding and retrieval:**
 - Tool: Claude Code
