@@ -72,6 +72,23 @@ My documents are mostly written in small paragraphs that are losely related, I b
 **Final chunk count:**
 245 chunks across all sources.
 
+**Sample chunks:**
+
+> **Chunk 1** (source: ucd-halal-kosher.txt)
+> "ckaged meal options that meet Kosher requirements. Please visit our Accessible Housing and Dining webpage for more information on requesting catered Kosher meals. Options in Retail Dining — We currently offer a variety of select fresh produce and pre-packaged Kosher items at our campus market locations."
+
+> **Chunk 2** (source: ucd-aggie-cash.txt)
+> "Inside The Silo — Tercero Dining Commons* — Tercero Market* Next to the Tercero Services Center and DC — ASUCD Coffee House Inside the Memorial Union — Campus Food Trucks+ At various food truck corrales on campus. * Receive a 10% discount when using Aggie Cash at these locations. + Receive a 10% discount at participating food trucks when using Aggie Cash."
+
+> **Chunk 3** (source: reddit-dining-campus-food.txt)
+> "ll consistent variety and quality during the week. Davis has all the standard college food( pasta, burgers, pizza, rice + meat + veggies), but usually also has other options that rotate, such as bulgogi, mozzarella chicken parm, nachos, etc. Latitude will also have nice staples that add a lot more variety in terms of flavor and spices. fresh omelettes for breakfast ( it's worth getting up at 6 for them in my opinion)"
+
+> **Chunk 4** (source: ucd-meal-plans.txt)
+> "r from week to week and expire every Sunday night. Meal swipes may be used to purchase up to $12 in goods per swipe at most Dining Services retail locations**; guests will need to pay the difference for purchases over $12; no credit or change returned for purchases under $12. *Please note that unlimited access is provided during hours of operation."
+
+> **Chunk 5** (source: ucd-allergens.txt)
+> "e for lunch and dinner at the Purple Zone, our allergy-friendly platform featuring a variety of tasty dishes made without any of the top major allergens, (wheat/gluten, soy, dairy, fish, shellfish, eggs, tree nuts, peanuts, and sesame) as well as coconut, soybean oil, soy lecithin, peanut oil, or fried items prepared in a shared fryer."
+
 ---
 
 ## Embedding Model
@@ -90,6 +107,38 @@ I used the all-MiniLM-L6-v2 via sentence-transformers embedding model since it i
 
 ---
 
+## Retrieval Test Results
+
+**Query 1: "Does UC Davis dining offer halal or kosher options?"**
+
+| Rank | Source | Distance | Chunk preview |
+|------|--------|----------|---------------|
+| 1 | ucd-vegan-vegetarian.txt | 0.2250 | "At UC Davis Dining Services, we are committed to meeting the diverse dietary needs and preferences of our student community..." |
+| 2 | ucd-halal-kosher.txt | 0.2330 | "Kosher Dining Options — 'Kosher-Friendly' Meals in our DC's — UC Davis Dining Services was approached by student leaders from the Jewish community..." |
+| 3 | ucd-halal-kosher.txt | 0.2703 | "Halal and Kosher Dining Options — Halal Dining Options — At UC Davis Dining Services, the 'H' icon is used to help our dining patrons easily identify dishes..." |
+
+**Why these chunks are relevant:** The top results correctly identify the dietary accommodation documents. Chunks 2 and 3 come directly from the halal/kosher source and contain the specific "H" icon labeling system and the Kosher-Friendly program details. Chunk 1 from the vegan/vegetarian source is also relevant because the embedding model recognizes the semantic similarity between different dietary accommodation topics. All distances are well below 0.3, indicating strong semantic matches.
+
+**Query 2: "What is Aggie Cash and how does it work?"**
+
+| Rank | Source | Distance | Chunk preview |
+|------|--------|----------|---------------|
+| 1 | ucd-aggie-cash.txt | 0.3754 | "Aggie Cash is a declining balance (debit) account students, faculty and staff use to purchase food at UC Davis Dining Services locations..." |
+| 2 | ucd-aggie-cash.txt | 0.4156 | "Aggie Cash balance rolls from quarter to quarter. Aggie Cash will be deactivated if the account is inactive for more than a 12-month period..." |
+| 3 | ucd-aggie-cash.txt | 0.4684 | "gieCard just as one would using a bank debit card. Balance transactions are deducted from the Aggie Cash account, until the account is exhausted..." |
+
+**Why these chunks are relevant:** All three top results come from the correct source document (ucd-aggie-cash.txt). The retrieval correctly prioritized the chunk containing the definition of Aggie Cash first, followed by chunks covering rollover policy and how payments work. Together these three chunks give the LLM everything it needs to explain the system comprehensively.
+
+**Query 3: "At Gunrock cafe are there TVs available for watch parties?"**
+
+| Rank | Source | Distance | Chunk preview |
+|------|--------|----------|---------------|
+| 1 | ucd-dining-article.txt | 0.4212 | "...community through the love of sports and good food. Here at The Gunrock, your students can play games, chill and attend events..." |
+| 2 | ucd-gunrock.txt | 0.4217 | "...ining room to host your next meeting or gathering. Sign up Online. Host Your Next Event or Meeting With Us..." |
+| 3 | ucd-gunrock.txt | 0.4416 | "...popular local brewery in town, Sudwerk Brewing Co. Even though we serve from Sudwerk, people of any age can dine with us. Want to watch your favorite sports game? We have 7 TVs..." |
+
+---
+
 ## Grounded Generation
 
 <!-- Explain how your system enforces grounding — how does it prevent the LLM from answering
@@ -104,6 +153,53 @@ I use a system prompt that tells the LLM to: Answer the user's question using ON
 
 **How source attribution is surfaced in the response:**
 Source attribution works at two levels. First, the system prompt instructs the LLM to cite which documents it draws from. Second, sources are programmatically guaranteed, the ask() function extracts the unique filenames from the retrieved chunks and returns them separately in the response, independent of what the LLM generates. The Gradio UI displays these in a dedicated "Retrieved from" textbox beneath the answer, so the user always sees which documents were used regardless of whether the LLM remembered to cite them.
+
+**Example response 1:**
+
+> **Query:** "Does UC Davis dining offer halal or kosher options?"
+>
+> **Answer:** Yes, UC Davis dining offers both halal and kosher options. According to the ucd-halal-kosher.txt document, halal dining options are available and identified with an "H" icon, indicating that the dishes do not contain certain non-halal ingredients. Additionally, the same document mentions "Kosher-Friendly" meals in the dining commons, although it notes that this is a stylistic designation rather than one based on the laws of Kashrut. Furthermore, it is mentioned that all food served at Hillel is kosher. (Source: ucd-halal-kosher.txt)
+>
+> **Retrieved from:** ucd-vegan-vegetarian.txt, ucd-halal-kosher.txt, reddit-dining-campus-food.txt
+
+**Example response 2:**
+
+> **Query:** "What is Aggie Cash and how does it work?"
+>
+> **Answer:** Aggie Cash is a declining balance (debit) account that students, faculty, and staff use to purchase food at UC Davis Dining Services locations. It works by transforming the AggieCard (UC Davis ID card) into a debit card with a finite amount of available funds. Account holders make purchases at on-campus retail food locations using their AggieCard, and balance transactions are deducted from the Aggie Cash account until it is exhausted. (Source: ucd-aggie-cash.txt)
+>
+> **Retrieved from:** ucd-aggie-cash.txt, ucd-dining-article.txt
+
+**Out-of-scope query (refusal response):**
+
+> **Query:** "What are the best CS professors at UC Davis?"
+>
+> **Answer:** I don't have enough information on that. The provided documents do not mention CS professors at UC Davis. They discuss dining options, coffee, and food variety on campus, but do not provide information about professors or the Computer Science department.
+>
+> **Retrieved from:** ucd-coffee.txt, reddit-dining-campus-food.txt, ucd-dining-commons-overview.txt, ucd-vegan-vegetarian.txt
+
+---
+
+## Query Interface
+
+The system uses a Gradio web UI launched with `python app.py` at `http://localhost:7860`.
+
+**Input fields:**
+- A text box labeled "Your question" where the user types a plain-language question about UC Davis dining
+
+**Output fields:**
+- "Answer" — an 8-line scrollable text box displaying the LLM's grounded response with source citations
+- "Retrieved from" — a 4-line text box listing the source document filenames that the retrieved chunks came from
+
+**Sample interaction transcript:**
+
+> **Input:** "What is Aggie Cash and how does it work?"
+>
+> **Answer:** Aggie Cash is a declining balance (debit) account that students, faculty, and staff use to purchase food at UC Davis Dining Services locations. It works by transforming the AggieCard (UC Davis ID card) into a debit card with a finite amount of available funds. Account holders make purchases at on-campus retail food locations using their AggieCard, and balance transactions are deducted from the Aggie Cash account until it is exhausted. (Source: ucd-aggie-cash.txt)
+>
+> **Retrieved from:**
+> - ucd-aggie-cash.txt
+> - ucd-dining-article.txt
 
 ---
 
