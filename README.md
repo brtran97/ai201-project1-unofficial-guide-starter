@@ -9,18 +9,10 @@
 
 ## Domain
 The domain is on-campus dining guide at UC Davis. The information is available to find online if you are willing to to the research but since there are so many options it becomes difficult to navigate and find the answer that you are looking for. The domain will cover the different dining options and includes some reddit reviews in order to have more opinions in case the users wants recommendations.
-<!-- What topic or category of knowledge does your system cover?
-     Why is this knowledge valuable, and why is it hard to find through official channels?
-     Example: "Student reviews of CS professors at [university] — useful because official
-     course descriptions don't reflect teaching style, exam difficulty, or workload." -->
 
 ---
 
 ## Document Sources
-
-<!-- List every source you collected documents from.
-     Be specific: include URLs, subreddit names, forum thread titles, or file names.
-     Aim for variety — sources that together cover different subtopics or perspectives. -->
 
 | # | Source | Type | URL or file path |
 |---|--------|------|-----------------|
@@ -52,13 +44,6 @@ The domain is on-campus dining guide at UC Davis. The information is available t
 ---
 
 ## Chunking Strategy
-
-<!-- Describe your chunking approach with enough specificity that someone else could reproduce it.
-     Include:
-     - Chunk size (characters or tokens) and why that size fits your documents
-     - Overlap size and why (or why not) you used overlap
-     - Any preprocessing you did before chunking (e.g., stripping HTML, removing headers)
-     - What your final chunk count was across all documents -->
 
 **Chunk size:**
 500 character chunks
@@ -92,12 +77,6 @@ My documents are mostly written in small paragraphs that are losely related, I b
 ---
 
 ## Embedding Model
-
-<!-- Name the embedding model you used and explain your choice.
-     Then answer: if you were deploying this system for real users and cost wasn't a constraint,
-     what tradeoffs would you weigh in choosing a different model?
-     Consider: context length limits, multilingual support, accuracy on domain-specific text,
-     latency, and local vs. API-hosted. -->
 
 **Model used:**
 all-MiniLM-L6-v2 via sentence-transformers
@@ -140,13 +119,6 @@ I used the all-MiniLM-L6-v2 via sentence-transformers embedding model since it i
 ---
 
 ## Grounded Generation
-
-<!-- Explain how your system enforces grounding — how does it prevent the LLM from answering
-     beyond the retrieved documents?
-     Describe both your system prompt (what instruction you gave the model) and any structural
-     choices (e.g., how you formatted the context, whether you filtered low-relevance chunks).
-     Do not just say "I told it to use the documents" — show the actual instruction or explain
-     the mechanism. -->
 
 **System prompt grounding instruction:**
 I use a system prompt that tells the LLM to: Answer the user's question using ONLY the information in the provided documents below. Do NOT use any outside knowledge. If the documents do not contain enough information to answer the question, say 'I don't have enough information on that.'" The temperature is set to 0.3 to reduce creative generation and keep responses closer to the source text. Each retrieved chunk is labeled with its source filename (e.g., [Source: ucd-aggie-cash.txt]) in the context block, so the LLM can reference specific documents in its answer.
@@ -205,10 +177,6 @@ The system uses a Gradio web UI launched with `python app.py` at `http://localho
 
 ## Evaluation Report
 
-<!-- Run your 5 test questions from planning.md through your system and record the results.
-     Be honest — a partially accurate or inaccurate result that you explain well is more
-     valuable than a suspiciously perfect result. -->
-
 | # | Question | Expected answer | System response (summarized) | Retrieval quality | Response accuracy |
 |---|----------|-----------------|------------------------------|-------------------|-------------------|
 | 1 |Which dining locations accepts student meal plans? |The are 3 dining commons Segundo, Tercero and Cuarto as well as the Latitude Restaurant |1. The three main dining commons (Source: reddit-dining-campus-food.txt, ucd-dining-commons-overview.txt) 2. Latitude Restaurant (Source: reddit-dining-campus-food.txt, ucd-meal-plans.txt) 3. A variety of campus dining and coffee locations (Source: ucd-meal-plans.txt) |Relevant |Partially accurate |
@@ -223,17 +191,6 @@ The system uses a Gradio web UI launched with `python app.py` at `http://localho
 ---
 
 ## Failure Case Analysis
-
-<!-- Identify at least one question where retrieval or generation did not work as expected.
-     Write a specific explanation of *why* it failed, tied to a part of the pipeline.
-
-     "The answer was wrong" is not an explanation.
-
-     "The relevant information was split across a chunk boundary, so retrieval returned
-     only half the context — the model didn't have enough to answer correctly" is an explanation.
-
-     "The embedding model treated the professor's nickname as out-of-vocabulary and returned
-     results from an unrelated review" is an explanation. -->
 
 **Question that failed:**
 How does pricing work at the dining common's and latitude?
@@ -251,9 +208,6 @@ I would like to try changing the chunk size either by increasing it from 500 -> 
 
 ## Spec Reflection
 
-<!-- Reflect on how planning.md shaped your implementation.
-     Answer both questions with at least 2–3 sentences each. -->
-
 **One way the spec helped you during implementation:**
 The spec helped me to clearly define the chunking strategy and retrival approach before prompting any tools. Claude code was able to use the concrete parameters to generate the logic to be as I expected it. The architecture diagram also helped to establish how each stage connects to each other and I am able to clearly understand how the separate modules feed into each other.
 
@@ -263,15 +217,6 @@ The spec did not specify what is the distance metric to be used for ChromaDB. Th
 ---
 
 ## AI Usage
-
-<!-- Describe at least 2 specific instances where you used an AI tool during this project.
-     For each: what did you give the AI as input, what did it produce, and what did you
-     change, override, or direct differently?
-
-     "I used Claude to help me code" is not sufficient.
-     "I gave Claude my Chunking Strategy section from planning.md and asked it to implement
-     chunk_text(). It returned a function using a fixed character split. I overrode the
-     chunk size from 500 to 200 because my documents are short reviews, not long guides." -->
 
 **Instance 1**
 
