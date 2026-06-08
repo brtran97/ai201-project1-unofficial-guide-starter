@@ -222,27 +222,27 @@ The spec did not specify what is the distance metric to be used for ChromaDB. Th
 
 - *What I gave the AI:*
 
-      My Chunking Strategy section from planning.md (500-character chunks, 50-character overlap), the Documents table listing my 24 sources, and the requirement to build a custom Python splitter that breaks at sentence/word boundaries.
+     My Chunking Strategy section from planning.md (500-character chunks, 50-character overlap), the Documents table listing my 24 sources, and the requirement to build a custom Python splitter that breaks at sentence/word boundaries.
 
 - *What it produced:*
 
-      A complete ingest.py with load_documents(), clean_text(), and chunk_text() functions that loaded all .txt files from documents/, normalized whitespace, and split text into chunks with metadata.
+     A complete ingest.py with load_documents(), clean_text(), and chunk_text() functions that loaded all .txt files from documents/, normalized whitespace, and split text into chunks with metadata.
 
 - *What I changed or overrode:*
 
-      The initial chunk_text() function had a bug where the start variable could move backwards when a word boundary was found close to the start position, causing an infinite loop that crashed the program. I had Claude Code diagnose the issue and fix it by adding a guard (start = max(start + 1, end - overlap)) to guarantee forward progress.
+     The initial chunk_text() function had a bug where the start variable could move backwards when a word boundary was found close to the start position, causing an infinite loop that crashed the program. I had Claude Code diagnose the issue and fix it by adding a guard (start = max(start + 1, end - overlap)) to guarantee forward progress.
      
 **Instance 2**
 
 - *What I gave the AI:*
 
-      My Retrieval Approach section from planning.md use embedding model all-MiniLM-L6-v2, Chromadb with top-k=5, the architecture diagram, and the chunk output format from ingest.py.
+     My Retrieval Approach section from planning.md use embedding model all-MiniLM-L6-v2, Chromadb with top-k=5, the architecture diagram, and the chunk output format from ingest.py.
 
 - *What it produced:*
 
-      embed.py with build_vector_store() and retrieve() functions that embedded all chunks into ChromaDB with source metadata and returned results with distance scores.
+     embed.py with build_vector_store() and retrieve() functions that embedded all chunks into ChromaDB with source metadata and returned results with distance scores.
 
 - *What I changed or overrode:*
 
-      The generated code used ChromaDB's default L2 distance metric. After testing, distance scores were all above 0.5 even on relevant results. I switched the collection to use cosine distance (metadata={"hnsw:space": "cosine"}) since that's what all-MiniLM-L6-v2 was trained to optimize for, which brought scores into the expected range.
+     The generated code used ChromaDB's default L2 distance metric. After testing, distance scores were all above 0.5 even on relevant results. I switched the collection to use cosine distance (metadata={"hnsw:space": "cosine"}) since that's what all-MiniLM-L6-v2 was trained to optimize for, which brought scores into the expected range.
 
